@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Spectrum Consulting Job Seeker's guide</title>
+
+    <meta name="description" content="Source code generated using layoutit.com">
+    <meta name="author" content="LayoutIt!">
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<div style="height:50px;background-color:black;width:100%">
+				<img src="logoFull.png" height="100%"  style="-webkit-filter: invert(1);filter: invert(1);margin-left:10px">
+			</div>
+			<br><br><br>
+			<div class="row">
+				<div class="col-md-2">
+				</div>
+				<div class="col-md-8">
+					<h3 class="text-center">
+						Download Spectrum Consulting's <br><b>Leveraging Linkedin for a Fulfilling Career</b>
+					</h3>
+				</div>
+				<br><br><br><br>
+				<div class="col-md-2">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<a role="form">
+				<div class="form-group">
+					 
+					<label for="name">
+						Name
+					</label>
+					<input type="text" class="form-control" id="name">
+				</div>
+				<div class="form-group">
+
+					<label for="email">
+						Email address
+					</label>
+					<input type="email" class="form-control" id="email">
+				</div>
+
+				<div class="form-group">
+
+					<label for="phone">
+						Phone Number
+					</label>
+					<input type="number" class="form-control" id="phone" maxlength="13">
+				</div>
+
+				<br>
+				<center>
+					<button type="button" class="btn btn-primary" id="submit" onclick="buttonclick()">
+						Submit
+					</button>
+
+					<a href="JobSeekersGuide.pdf" download="LeveragingLinkedin" hidden="true" id = "downloadGuide">
+						<button type="button" class="btn btn-primary">
+							Download
+						</button>
+					</a>
+				</center>
+			</form>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+</div>
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/scripts.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-app.js"></script>
+
+	<!-- TODO: Add SDKs for Firebase products that you want to use
+         https://firebase.google.com/docs/web/setup#available-libraries -->
+	<script src="https://www.gstatic.com/firebasejs/7.3.0/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+
+	<script>
+
+
+			  // Your web app's Firebase configuration
+			  var firebaseConfig = {
+				apiKey: "AIzaSyBwuOg1EHkc2o0FSOUJqAx6bUFgySFLV8w",
+				authDomain: "download-js-guide.firebaseapp.com",
+				databaseURL: "https://download-js-guide.firebaseio.com",
+				projectId: "download-js-guide",
+				storageBucket: "download-js-guide.appspot.com",
+				messagingSenderId: "399628252277",
+				appId: "1:399628252277:web:6c355affcb35e8764e343c",
+				measurementId: "G-0J77W4Y1EF"
+			  };
+			  // Initialize Firebase
+			  firebase.initializeApp(firebaseConfig);
+			  firebase.analytics();
+
+			  console.log(firebase)
+
+			var buttonclick = function(){
+
+  			var obj = {};
+
+  			if(document.getElementById('name').value !== ''){
+  				obj.name = document.getElementById('name').value;
+  			}else{
+  				alert("Enter a valid name")
+  			}
+  			if(document.getElementById('phone').value.length>9 && document.getElementById('phone').value.length<13){
+  				obj.phone = document.getElementById('phone').value;
+  			}else{
+  				alert("Enter a valid phone nunmber!");
+  			}
+  			var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    		console.log(re.test(document.getElementById('email').value.toLowerCase()));
+    		if(re.test(document.getElementById('email').value.toLowerCase())){
+    			obj.email = document.getElementById('email').value.toLowerCase();
+    		}else{
+    			alert("Enter a valid email address!");
+    		}
+
+
+    		if(obj.name != undefined && obj.email!=undefined && obj.phone!=undefined){
+
+    			firebase.database().ref('Downloaders').push(obj);
+				document.getElementById('downloadGuide').hidden = false;
+				document.getElementById('submit').hidden = true;
+    		}
+
+  		}
+
+
+	</script>
+  	<!-- The core Firebase JS SDK is always required and must be listed first -->
+
+
+  </body>
+</html>
